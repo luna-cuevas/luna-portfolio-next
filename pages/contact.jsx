@@ -48,7 +48,7 @@ const contact = () => {
 
 
   return (
-    <div className='h-[70vh] z-0 flex flex-col w-screen overflow-hidden'>
+    <div className='h-[70vh] md:mt-24 mt-10 z-0 flex flex-col w-screen overflow-hidden'>
       {!emailSent ? 
         <div className='md:w-1/2 h-fit md:justify-end z-50 flex flex-col justify-center w-11/12 mx-auto'>            
           <h1 className='m-auto my-2 text-2xl'>~Send me a message for a reward~</h1>

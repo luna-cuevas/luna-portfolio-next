@@ -1,12 +1,22 @@
 import React from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
-import Particles from 'react-particles-js';
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+
 
 const Layout = ({children}) => {
+
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
+  const particlesLoaded = (container) => {};
+  
   return (
     <main className='bg-[#222] overflow-hidden min-h-screen text-white whitespace-pre-wrap'>
       <Particles 
+        init={particlesInit} 
+        loaded={particlesLoaded}
         className='fixed top-0 bottom-0 left-0 right-0 z-0'
         params={{
           "particles": {

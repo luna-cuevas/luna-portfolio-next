@@ -18,16 +18,16 @@ import Button from "../../components/Button";
 
 const ProjectDetails = ({ project }) => {
   const title = project.attributes.projectTitle;
-  const skills = project.attributes.projectSkills;
+  const skills = project.attributes.projectSkillz;
   const desc = project.attributes.projectDesc;
   const images = project.attributes.projectImages.data.map((image) => {
-    return process.env.NEXT_PUBLIC_STRAPI_URL + image.attributes.url
+    return image.attributes.url
   })
   const link = project.attributes.projectLink;
   const gitRepo = project.attributes.gitRepo;
   
   return (
-    <div className='max-w-[1400px] gap-6 w-screen md:min-h-[500px] overflow-y-scroll m-auto justify-center flex flex-col md:flex-row md:pt-10'>
+    <div className='max-w-[1400px] mt-10 gap-2 md:gap-6 w-screen md:min-h-[500px] md:mt-[20vh] overflow-y-scroll m-auto justify-center flex flex-col md:flex-row '>
       <div className="h-fit rounded-xl md:w-1/2 flex flex-col">
         <div className='md:w-full w-screen'>
           <Swiper
@@ -58,7 +58,7 @@ const ProjectDetails = ({ project }) => {
             pagination={{ clickable: true }}
           >
             {images.map((image, id) => (
-              <SwiperSlide className="p-10"><img key={id} className='w-full p-2 bg-[#2e2e2e] m-auto border-2 border-gray-700 rounded-lg' src={image} alt="" /></SwiperSlide>
+              <SwiperSlide className="p-10 select-none"><img key={id} className='w-full p-2 bg-[#2e2e2e] m-auto border-2 border-gray-700 rounded-lg' src={image} alt="" /></SwiperSlide>
             ))}
           </Swiper>
           <div className="flex justify-around w-1/2 gap-4 m-auto">
@@ -68,9 +68,13 @@ const ProjectDetails = ({ project }) => {
         </div>
       </div>
       <div className="h-auto w-[1px] border-2 border-gray-500" />
-      <div className='md:w-1/2 px-6 z-10 bg-[#222] text-center'>
+      <div className='md:w-1/2 px-6 z-10 flex flex-col bg-[#222] text-center'>
         <h1 className='my-4 text-2xl'>{title}</h1>
-        <p className='my-4 whitespace-pre'>{skills}</p>
+        <div className="flex flex-wrap gap-4 mx-auto my-4">
+          {skills.map((skill) => (
+            <p style={{'border-image': 'linear-gradient(to right, #4568dc, #b06ab3) 1 1 100%'}} className='border-2'>{skill.skill}</p>
+          ))}
+        </div>
         <p className='font-light text-left'>{desc}</p>
       </div>
     </div>
@@ -94,7 +98,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const query = qs.stringify({
-    populate: ['projectImages'], 
+    populate: ['projectImages', 'projectSkillz'], 
   }, {
     encodeValuesOnly: true, // prettify URL
   });

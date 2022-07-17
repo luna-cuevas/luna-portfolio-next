@@ -53,7 +53,7 @@ const Highlight = ( { projects } ) => {
               >
                 {project.attributes.images.data.map((image, id) => (
                   <SwiperSlide key={id} className="p-10">
-                    <img className='w-full m-auto rounded-lg' src={process.env.NEXT_PUBLIC_STRAPI_URL + image.attributes.url} alt="" />
+                    <img className='w-full m-auto rounded-lg select-none' src={image.attributes.url} alt="" />
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -64,12 +64,11 @@ const Highlight = ( { projects } ) => {
               <h2 className='text-2xl'>{project.attributes.title}</h2>
               <span className='flex flex-wrap gap-4 my-4 text-xs' id='tailwind'>
                 {project.attributes.skills.map((skillObj) => (
-                  <span key={skillObj.id} className='text-xs'>{skillObj.skill}</span>
+                  <span style={{'border-image': 'linear-gradient(to right, #4568dc, #b06ab3) 1 1 100%'}} key={skillObj.id} className='text-xs border-2 border-[#b06ab3]'>{skillObj.skill}</span>
                 ))}
               </span>
               <div className='text-sm'>
                 <span>{project.attributes.description}</span>
-                <button className='px-2'>read more</button>
               </div>
               <div className='md:justify-start md:gap-2 flex justify-center gap-6 mt-4'>
                 <Button link={project.attributes.linkToDemo} text={'Live Demo'}/>
